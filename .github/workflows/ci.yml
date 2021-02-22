@@ -70,4 +70,4 @@ jobs:
           bundle install
 
       - name: Spec tests
-        run: bundel exec rake parallel_spec
+        run: bundle exec rake parallel_spec
