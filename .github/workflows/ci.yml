@@ -45,7 +45,6 @@ jobs:
       - name: check puppet module metadata
         run: bundle exec rake metadata_lint
   spec:
-    name: spec tests
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true
