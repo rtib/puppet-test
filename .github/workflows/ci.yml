@@ -20,7 +20,8 @@ jobs:
         run: |
           bundle -v
           rm -f Gemfile.lock
-          bundle install --without system_tests
+          bundle config set --local without 'system_tests'
+          bundle install
 
       - name: check symlinks absent
         run: bundle exec rake check:symlinks
