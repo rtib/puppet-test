@@ -51,8 +51,6 @@ jobs:
       fail-fast: true
       matrix:
         include:
-          - puppet: "~> 5.0"
-            ruby: 2.4.5
           - puppet: "~> 6.0"
             ruby: 2.5.7
     env:
