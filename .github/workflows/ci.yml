@@ -6,9 +6,15 @@ on:
     branches: [ main ]
 jobs:
   static:
+    name: static checks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      - name: setup ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.5.7
 
       - name: Prepare environment
         run: |
