@@ -18,8 +18,6 @@ jobs:
 
       - name: Prepare environment
         run: |
-          bundle -v
-          rm -f Gemfile.lock
           bundle config set --local without 'system_tests'
           bundle install
 
@@ -46,3 +44,32 @@ jobs:
         
       - name: check puppet module metadata
         run: bundle exec rake metadata_lint
+  spec:
+    name: spec tests
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        include:
+          - puppet: "~> 5.0"
+            ruby: 2.4.5
+          - puppet: "~> 6.0"
+            ruby: 2.5.7
+    env:
+      PUPPET_GEM_VERSION: "${{ matrix.puppet }}"
+    name: Spec tests for Puppet ${{ matrix.puppet }} on Ruby ${{ matrix.ruby }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: setup ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.5.7
+
+      - name: Prepare environment
+        run: |
+          bundle config set --local without 'system_tests'
+          bundle install
+
+      - name: Spec tests
+        run: bundel exec rake parallel_spec
