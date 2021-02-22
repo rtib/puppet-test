@@ -45,6 +45,7 @@ jobs:
       - name: check puppet module metadata
         run: bundle exec rake metadata_lint
   spec:
+    needs: static
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true
