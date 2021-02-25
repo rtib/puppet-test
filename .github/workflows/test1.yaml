@@ -30,3 +30,6 @@ jobs:
           git add .
           git commit -m "auto strings:generate:reference"
           git push
+
+      - name: Update GH-Pages
+        run: bundle exec rake strings:gh_pages:update
