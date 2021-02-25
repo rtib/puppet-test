@@ -1,3 +1,4 @@
+---
 name: test1
 
 on: workflow_dispatch
@@ -9,9 +10,5 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Run a one-line script
-      run: echo Hello, world!
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+    - name: Update GH-Pages
+      run: bundle exec rake strings:gh_pages:update
