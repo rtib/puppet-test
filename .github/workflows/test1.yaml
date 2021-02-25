@@ -24,7 +24,7 @@ jobs:
 
       - uses: fusion-engineering/setup-git-credentials@v2
         with:
-          credentials: ${{secrets.GIT_CREDENTIALS}}
+          credentials: ${{secrets.GITHUB_TOKEN}}
 
       - name: Update GH-Pages
         run: bundle exec rake strings:gh_pages:update
