@@ -9,6 +9,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Update GH-Pages
-      run: bundle exec rake strings:gh_pages:update
+      - name: checkout
+        uses: actions/checkout@v1
+
+      - name: setup ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.5.7
+
+      - name: Prepare environment
+        run: |
+          bundle config set --local without 'system_tests'
+          bundle install
+
+      - name: Update GH-Pages
+        run: bundle exec rake strings:gh_pages:update
