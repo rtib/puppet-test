@@ -9,12 +9,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: checkout
+        uses: actions/checkout@v1
+
       - uses: oleksiyrudenko/gha-git-credentials@v2-latest
         with:
           token: '${{ secrets.GITHUB_TOKEN }}'
-
-      - name: checkout
-        uses: actions/checkout@v1
 
       - name: setup ruby
         uses: ruby/setup-ruby@v1
