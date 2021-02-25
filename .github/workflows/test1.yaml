@@ -39,4 +39,9 @@ jobs:
           git push
 
       - name: Update GH-Pages
-        run: bundle exec rake strings:gh_pages:update
+        run: |
+          bundle exec rake strings:generate
+          cd doc
+          git add .
+          git commit -m "[strings] Generated Documentation Job ${{ github.job }}"
+          git push origin gh-pages -f
