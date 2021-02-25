@@ -21,8 +21,10 @@ jobs:
         run: |
           bundle config set --local without 'system_tests'
           bundle install
-          git config --global user.name test1.github-action
-          git config --global user.email test1.github-action@users.noreply.github.com
 
-      - name: Update GH-Pages
-        run: bundle exec rake strings:gh_pages:update
+      - name: Update Reference.md
+        run: |
+          bundle exec rake strings:generate:reference
+          git add .
+          git commit -m "auto strings:generate:reference"
+          git push
