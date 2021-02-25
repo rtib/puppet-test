@@ -21,10 +21,8 @@ jobs:
         run: |
           bundle config set --local without 'system_tests'
           bundle install
-
-      - uses: fusion-engineering/setup-git-credentials@v2
-        with:
-          credentials: ${{secrets.GITHUB_TOKEN}}
+          git config --global user.name test1.github-action
+          git config --global user.email test1.github-action@users.noreply.github.com
 
       - name: Update GH-Pages
         run: bundle exec rake strings:gh_pages:update
