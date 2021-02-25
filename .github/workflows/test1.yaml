@@ -12,10 +12,6 @@ jobs:
       - name: checkout
         uses: actions/checkout@v1
 
-      - uses: oleksiyrudenko/gha-git-credentials@v2-latest
-        with:
-          token: '${{ secrets.GITHUB_TOKEN }}'
-
       - name: setup ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -27,4 +23,7 @@ jobs:
           bundle install
 
       - name: Update GH-Pages
+        uses: oleksiyrudenko/gha-git-credentials@v2-latest
+        with:
+          token: '${{ secrets.GITHUB_TOKEN }}'
         run: bundle exec rake strings:gh_pages:update
