@@ -4,3 +4,21 @@
 
 ## Table of Contents
 
+### Classes
+
+* [`test`](#test): A short summary of the purpose of this class
+
+## Classes
+
+### <a name="test"></a>`test`
+
+A description of what this class does
+
+#### Examples
+
+##### 
+
+```puppet
+include test
+```
+
