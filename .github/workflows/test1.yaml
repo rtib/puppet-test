@@ -22,10 +22,9 @@ jobs:
           bundle config set --local without 'system_tests'
           bundle install
 
-      - uses: oleksiyrudenko/gha-git-credentials@v2-latest
+      - uses: fusion-engineering/setup-git-credentials@v2
         with:
-          global: true
-          token: '${{ secrets.GITHUB_TOKEN }}'
+          credentials: ${{secrets.GIT_CREDENTIALS}}
 
       - name: Update GH-Pages
         run: bundle exec rake strings:gh_pages:update
