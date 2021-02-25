@@ -21,12 +21,19 @@ jobs:
         run: |
           bundle config set --local without 'system_tests'
           bundle install
-
-      - name: Update Reference.md
-        run: |
-          bundle exec rake strings:generate:reference
           git config user.name ${{ github.actor }}
           git config user.email rtib@users.noreply.github.com
+
+      - name: Update Reference.md
+        run: bundle exec rake strings:generate:reference
+
+      - name: Check for changes
+        id: changes
+        uses: UnicornGlobal/has-changes-action@v1
+
+      - name: Commit changes
+        if: steps.changes.outputs.changed == 1
+        run: |
           git add .
           git commit -m "auto strings:generate:reference"
           git push
