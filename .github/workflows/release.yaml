@@ -45,7 +45,7 @@ jobs:
           git push --follow-tags
 
       - name: Publish the module
-        if: (steps.changes.outputs.changed == 1) && (${{ secrets.forge_username }} != '')
+        if: (steps.changes.outputs.changed == 1) && (secrets.forge_username != '')
         run: bundle exec rake module:push
         env:
           BLACKSMITH_FORGE_USERNAME: ${{ secrets.forge_username }}
