@@ -1,5 +1,5 @@
 ---
-name: test1
+name: release
 
 on: workflow_dispatch
 
@@ -36,12 +36,17 @@ jobs:
         id: changes
         uses: UnicornGlobal/has-changes-action@v1.0.11
 
-      - name: Commit changes
+      - name: Commit changes and release
         if: steps.changes.outputs.changed == 1
         run: |
           git add .
-          git commit -m "auto strings:generate:reference"
-          git push
+          git commit -m "[GH-Action] update reference and changelog"
+          bundle exec rake module:tag
+          git push --follow-tags
 
-#      - name: Update GH-Pages
-#        run: bundle exec rake strings:gh_pages:update
+      - name: Publish the module
+        if: (steps.changes.outputs.changed == 1) && (${{ secrets.forge_username }} != '')
+        run: bundle exec rake module:push
+        env:
+          BLACKSMITH_FORGE_USERNAME: ${{ secrets.forge_username }}
+          BLACKSMITH_FORGE_PASSWORD: ${{ secrets.forge_password }}
