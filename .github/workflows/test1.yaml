@@ -29,6 +29,8 @@ jobs:
 
       - name: Update Changelog.md
         run: bundle exec rake changelog
+        env:
+          CHANGELOG_GITHUB_TOKEN: ${{ github.token }}
 
       - name: Check for changes
         id: changes
