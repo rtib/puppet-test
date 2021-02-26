@@ -27,6 +27,9 @@ jobs:
       - name: Update Reference.md
         run: bundle exec rake strings:generate:reference
 
+      - name: Update Changelog.md
+        run: bundle exec rake changelog
+
       - name: Check for changes
         id: changes
         uses: UnicornGlobal/has-changes-action@v1.0.11
@@ -38,5 +41,5 @@ jobs:
           git commit -m "auto strings:generate:reference"
           git push
 
-      - name: Update GH-Pages
-        run: bundle exec rake strings:gh_pages:update
+#      - name: Update GH-Pages
+#        run: bundle exec rake strings:gh_pages:update
