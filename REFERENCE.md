@@ -12,7 +12,7 @@
 
 ### <a name="test"></a>`test`
 
-A description of what this class does
+It makes a personalisable greeting message.
 
 #### Examples
 
@@ -21,4 +21,18 @@ A description of what this class does
 ```puppet
 include test
 ```
+
+#### Parameters
+
+The following parameters are available in the `test` class:
+
+* [`who`](#who)
+
+##### <a name="who"></a>`who`
+
+Data type: `String`
+
+for whom the message is to be personalised
+
+Default value: `'World'`
 
