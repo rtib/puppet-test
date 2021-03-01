@@ -49,7 +49,7 @@ jobs:
         if: (steps.changes.outputs.changed == 1)
         run: |
           if [ -n $BLACKSMITH_FORGE_USERNAME ]; then
-            echo $BLACKSMITH_FORGE_USERNAME
+            echo "username: $BLACKSMITH_FORGE_USERNAME"
             # bundle exec rake module:push
           else
             echo "Not publishing module to Puppet Forge. To enable deployment, set secrets forge_name and forge_password."
