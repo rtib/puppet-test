@@ -42,12 +42,12 @@ jobs:
           git add .
           git commit -m "[GH-Action] update reference and changelog"
           bundle exec rake module:tag
-          git push --follow-tags
+          git push --tags
 
       - name: Publish the module
         if: (steps.changes.outputs.changed == 1)
         run: |
-          if ["$BLACKSMITH_FORGE_USERNAME" != ""]; then
+          if [ -n $BLACKSMITH_FORGE_USERNAME ]; then
             bundle exec rake module:push
           else
             echo "Not publishing module to Puppet Forge. To enable deployment, set secrets forge_name and forge_password."
