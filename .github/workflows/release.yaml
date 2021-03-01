@@ -21,8 +21,8 @@ jobs:
         run: |
           bundle config set --local without 'system_tests'
           bundle install
-          git config --global user.name ${{ github.actor }}
-          git config --global user.email rtib@users.noreply.github.com
+          git config --global user.name "${{ github.workflow }} #${{ github.run_number }}"
+          git config --global user.email "${{ github.repository_owner }}@users.noreply.github.com"
 
       - name: Update Reference.md
         run: bundle exec rake strings:generate:reference
@@ -45,8 +45,13 @@ jobs:
           git push --follow-tags
 
       - name: Publish the module
-        if: (steps.changes.outputs.changed == 1) && (secrets.forge_username != '')
-        run: bundle exec rake module:push
+        if: (steps.changes.outputs.changed == 1)
+        run: |
+          if ["$BLACKSMITH_FORGE_USERNAME" != ""]; then
+            bundle exec rake module:push
+          else
+            echo "Not publishing module to Puppet Forge. To enable deployment, set secrets forge_name and forge_password."
+          fi
         env:
           BLACKSMITH_FORGE_USERNAME: ${{ secrets.forge_username }}
           BLACKSMITH_FORGE_PASSWORD: ${{ secrets.forge_password }}
